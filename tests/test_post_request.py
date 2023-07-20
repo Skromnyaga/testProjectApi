@@ -29,5 +29,6 @@ class TestAPI:
 
     @allure.story("Login without password")
     def test_login_without_password(self):
-        response = self.api.login(self.login, self.password)
-        assert response.status_code == 200
+        response = self.api.login(self.login, "")
+        assert response.status_code == 400
+        assert response.json()["error"] == "Missing password"
